@@ -1,5 +1,6 @@
 package com.marvel.api.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.marvel.api.entity.Character;
 import com.marvel.api.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,9 @@ public class CharacterController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}/status")
+    public boolean patch(@PathVariable Integer id) {
+        return service.patch(id);
+
+    }
 }

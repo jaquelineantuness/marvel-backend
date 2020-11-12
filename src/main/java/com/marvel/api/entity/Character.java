@@ -22,4 +22,5 @@ public class Character {
     private Integer id;
     private String name;
     private String description;
+    private boolean active;
 }
