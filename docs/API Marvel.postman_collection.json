@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "2d3d5383-56ff-4e1e-b310-e370e06e1a50",
+		"name": "API Marvel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d60ae594-9c5c-4993-be88-71cee8d6233c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"hulk\");",
+							"});",
+							"pm.test(\"Valida body: campo description\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.description).to.eql(\"hulk description\");",
+							"});",
+							"pm.test(\"Valida body: campo active\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.active).to.eql(true);",
+							"});",
+							"",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n    \"name\":\"hulk\",\n    \"description\":\"hulk description\",\n    \"active\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - hero Spider-man",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n    \"name\":\"Spiider-man\",\n    \"description\":\"Spiider-man description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0619954-baeb-4ab3-8c84-5bf3784b9b0f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.expect(jsonData[0].id).to.eql(1);",
+							"",
+							"});",
+							"pm.test(\"Valida body: campo name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].name).to.eql(\"hulk\");",
+							"});",
+							"pm.test(\"Valida body: campo description\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].description).to.eql(\"hulk description\");",
+							"});",
+							"pm.test(\"Valida body: campo active\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].active).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "156a028b-7c63-45dc-a4c1-21a6a301c642",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"  ",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"id\")));",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"hulk\");",
+							"});",
+							"pm.test(\"Valida body: campo description\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.description).to.eql(\"hulk description\");",
+							"});",
+							"pm.test(\"Valida body: campo active\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.active).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0e0f42c-d61d-40c1-bf8a-0b1990d4093b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"  ",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"id\")));",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"hulk alterado\");",
+							"});",
+							"pm.test(\"Valida body: campo description\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.description).to.eql(\"hulk description alt\");",
+							"});",
+							"pm.test(\"Valida body: campo active\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.active).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"name\":\"hulk alterado\",\n    \"description\":\"hulk description alt\",\n    \"active\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /{id}/status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe7efcc7-8428-45ff-b24c-dff111b1791e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"status\", jsonData);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{id}}/status",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{id}}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Valida PATCH",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0e320bb-d130-42f1-b4da-c855ba6a73b3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"  ",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.environment.get(\"id\")));",
+							"});",
+							"",
+							"pm.test(\"Valida body: campo name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"hulk alterado\");",
+							"});",
+							"pm.test(\"Valida body: campo description\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.description).to.eql(\"hulk description alt\");",
+							"});",
+							"pm.test(\"Valida body: campo active\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.active).to.eql(Boolean(pm.environment.get(\"status\")));",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a9ab82e-e7e5-4113-99b5-2d32bb2755f8",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Valida DELETE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "295bee07-eb45-4dfb-b854-9147379cb98b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Valida se body não existe\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.null;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
