@@ -1,6 +1,9 @@
 package com.marvel.api.controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.marvel.api.adapter.CharacterAdapter;
+import com.marvel.api.controller.dto.CharacterDto;
+import com.marvel.api.controller.form.CharacterForm;
 import com.marvel.api.entity.Character;
 import com.marvel.api.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +21,18 @@ public class CharacterController {
     CharacterService service;
 
     @GetMapping
-    public ResponseEntity<List<Character>> findAll(){
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<CharacterDto>> findAll(){
+        return ResponseEntity.ok(CharacterAdapter.charactersToCharactersDto(service.findAll()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Character>> findById(@PathVariable Integer id){
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Character> save(@RequestBody Character character){
-        return ResponseEntity.ok(service.save(character));
+    public ResponseEntity<CharacterDto> save(@RequestBody CharacterForm character){
+        return ResponseEntity.ok(CharacterAdapter.characterToCharacterDto(service.save(CharacterAdapter.characterFormToCharacter(character))));
     }
     @PutMapping("/{id}")
     public ResponseEntity<Character> put(@PathVariable Integer id, @RequestBody Character character){
