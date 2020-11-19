@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \n    \"name\":\"Spiider-man\",\n    \"description\":\"Spiider-man description\"\n}",
+					"raw": "{\n  \n    \"name\":\"Spiider-man\",\n    \"description\":\"Spiider-man description\",\n    \"active\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -369,12 +369,12 @@
 						"id": "295bee07-eb45-4dfb-b854-9147379cb98b",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(404);",
 							"});",
 							"",
 							"pm.test(\"Valida se body não existe\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.null;",
+							"    pm.expect(jsonData.errors[0]).to.have.equals(\"Record not found\");",
 							"});",
 							"",
 							""
