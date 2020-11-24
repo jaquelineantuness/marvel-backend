@@ -3,6 +3,7 @@ package com.marvel.api.adapter;
 import com.marvel.api.controller.dto.CharacterDto;
 import com.marvel.api.controller.form.CharacterForm;
 import com.marvel.api.entity.Character;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,8 @@ public class CharacterAdapter {
             .build()
         ).collect(Collectors.toList());
 
-
+    }
+    public  static Page<CharacterDto> charactersPageToCharactersDtoPage (Page<Character> characters){
+        return characters.map(CharacterDto::new);
     }
 }

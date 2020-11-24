@@ -4,6 +4,8 @@ import com.marvel.api.config.ApiErrorEnum;
 import com.marvel.api.entity.Character;
 import com.marvel.api.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,8 +28,8 @@ public class CharacterService {
         return repository.save(character);
     }
 
-    public List<Character> findAll() {
-        return repository.findAll();
+    public Page<Character> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public void delete(Integer id) {

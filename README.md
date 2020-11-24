@@ -24,8 +24,13 @@
 
 ## Stream
 
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
 
+## Pageble
+/characters _mostra a primeira página limitado a 1, ordenado por name_
+
+`/characters?page=0`
+
+ _indice_
 
 
 
