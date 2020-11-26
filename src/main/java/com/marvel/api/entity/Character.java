@@ -22,7 +22,7 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "Name is mandatory")
+
     private String name;
 
     private String description;
