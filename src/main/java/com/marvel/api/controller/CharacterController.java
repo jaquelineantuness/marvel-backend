@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class CharacterController {
     }
 
     @PostMapping
-    public ResponseEntity<CharacterDto> save(@RequestBody CharacterForm character){
+    public ResponseEntity<CharacterDto> save(@Valid @RequestBody CharacterForm character){
         return ResponseEntity.ok(CharacterAdapter.characterToCharacterDto(service.save(CharacterAdapter.characterFormToCharacter(character))));
     }
     @PutMapping("/{id}")
