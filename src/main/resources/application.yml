@@ -11,3 +11,8 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
+springdoc:
+  api-docs:
+    path: /api-documentation
+  swagger-ui:
+    path: /documentation
