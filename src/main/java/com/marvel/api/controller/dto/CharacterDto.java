@@ -13,9 +13,11 @@ import lombok.NoArgsConstructor;
 public class CharacterDto {
     private String name;
     private String description;
+    private Integer id;
 
 
     public CharacterDto(Character character){
+        this.id=character.getId();
         this.name=character.getName();
         this.description= character.getDescription();
     }
