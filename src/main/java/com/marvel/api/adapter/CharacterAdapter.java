@@ -5,7 +5,6 @@ import com.marvel.api.controller.form.CharacterForm;
 import com.marvel.api.entity.Character;
 import org.springframework.data.domain.Page;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,12 +17,12 @@ public class CharacterAdapter {
                 .description(characterForm.getDescription())
             .build();
     }
+
     public static CharacterDto characterToCharacterDto(Character character){
         return CharacterDto.builder()
                 .name(character.getName())
                 .description(character.getDescription())
             .build();
-
     }
 
     public static List<CharacterDto> charactersToCharactersDto(List<Character> characters) {
@@ -34,8 +33,8 @@ public class CharacterAdapter {
                 .description((character.getDescription()))
             .build()
         ).collect(Collectors.toList());
-
     }
+
     public  static Page<CharacterDto> charactersPageToCharactersDtoPage (Page<Character> characters){
         return characters.map(CharacterDto::new);
     }

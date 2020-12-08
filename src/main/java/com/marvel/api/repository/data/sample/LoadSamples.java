@@ -6,8 +6,8 @@ import java.util.List;
 
 
 public class LoadSamples {
-    public static List<Character> loadCharacter(){
 
+    public static List<Character> loadCharacter(){
         return Arrays.asList(
                 Character.builder()
                         .name("Hulk")
