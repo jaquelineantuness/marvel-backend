@@ -58,8 +58,7 @@ public class CharacterController {
     @PutMapping("/{id}")
     public ResponseEntity<CharacterDto> put(@Parameter(name = "Character id", example = "1", required = true)
                                              @PathVariable Integer id,@Valid @RequestBody CharacterForm characterForm){
-        characterForm.setId(id);
-        CharacterDto characterDto = CharacterAdapter.characterToCharacterDto(service.put(CharacterAdapter.characterFormToCharacter(characterForm)));
+        CharacterDto characterDto = CharacterAdapter.characterToCharacterDto(service.put(id, CharacterAdapter.characterFormToCharacter(characterForm)));
         return ResponseEntity.status(HttpStatus.OK).body(characterDto);
     }
 

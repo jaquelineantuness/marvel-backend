@@ -13,7 +13,6 @@ public class CharacterAdapter {
 
     public static Character characterFormToCharacter(CharacterForm characterForm){
         return Character.builder()
-                .id(characterForm.getId())
                 .name(characterForm.getName())
                 .description(characterForm.getDescription())
             .build();
@@ -21,6 +20,7 @@ public class CharacterAdapter {
 
     public static CharacterDto characterToCharacterDto(Character character){
         return CharacterDto.builder()
+                .id(character.getId())
                 .name(character.getName())
                 .description(character.getDescription())
             .build();

@@ -33,18 +33,24 @@ public class CharacterService {
     }
 
     public Character save(Character character) {
-        for(Character characterfor : repository.findAll()){
-            if(character.getName().equals(characterfor.getName())){
-                throw new ResponseStatusException(HttpStatus.CONFLICT,ApiErrorEnum.RECORD_IS_EXIST.getDescricao());
-            }
-        }
+        verifyIfExistsName(character.getName());
         return repository.save(character);
     }
 
-    public Character put(Character character) {
-        if (!repository.findById(character.getId()).isPresent()) {
+    private void verifyIfExistsName(String name) {
+        for(Character character : repository.findAll()){
+            if(name.equals(character.getName())){
+                throw new ResponseStatusException(HttpStatus.CONFLICT, ApiErrorEnum.RECORD_IS_EXIST.getDescricao());
+            }
+        }
+    }
+
+    public Character put(Integer id, Character character) {
+        if (!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, ApiErrorEnum.RECORD_NOT_FOUND_MESSAGE.getDescricao());
         }
+        verifyIfExistsName(character.getName());
+        character.setId(id);
         return repository.save(character);
     }
 
