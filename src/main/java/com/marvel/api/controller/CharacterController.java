@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -55,10 +56,11 @@ public class CharacterController {
 
     // TODO Receber Form e Devolver DTO
     @PutMapping("/{id}")
-    public ResponseEntity<Character> put(@Parameter(name = "Character id", example = "1", required = true)
-                                             @PathVariable Integer id, @RequestBody Character character){
-        character.setId(id);
-        return ResponseEntity.ok(service.put(character));
+    public ResponseEntity<CharacterDto> put(@Parameter(name = "Character id", example = "1", required = true)
+                                             @PathVariable Integer id,@Valid @RequestBody CharacterForm characterForm){
+        characterForm.setId(id);
+        CharacterDto characterDto = CharacterAdapter.characterToCharacterDto(service.put(CharacterAdapter.characterFormToCharacter(characterForm)));
+        return ResponseEntity.status(HttpStatus.OK).body(characterDto);
     }
 
     @DeleteMapping("/{id}")

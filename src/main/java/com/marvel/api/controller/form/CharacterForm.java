@@ -23,4 +23,6 @@ public class CharacterForm {
 
     @Schema(example = "The stronguest", required = true)
     private String description;
+    private Integer id;
+
 }
